@@ -11,8 +11,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="http://localhost/javascript/write_style.css?after">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
-<title>집사들의 은밀한 공간</title>
+<script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <title>YJ's Page</title> 
 <style type="text/css">
 	a, a:hover{
 		color:#000000;
@@ -31,17 +32,14 @@
 			pageNumber =Integer.parseInt(request.getParameter("pageNumber"));
 		}
 	%>
-    <div>
-        <ul>
-            <li><a href="write.jsp">자랑게시판</a></li>
-            <li><a href="#">입양/임시보호</a></li>
-            <li><a href="#">기타</a>
-                <ul>
-                    <li><a href="#">공지사항</a></li>
-                    <li><a href="#">Q&A</a></li>
-                </ul>
-            </li>
-        </ul>
+    <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; position:fixed;" id="mySidebar">
+ 	 <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+     <a href="main.jsp" class="w3-bar-item w3-button"><ion-icon name="home-outline"></ion-icon>HOME</a>
+ 	 <a href="https://github.com/yun19?tab=repositories" class="w3-bar-item w3-button"><ion-icon name="earth-outline"></ion-icon>깃허브</a>
+  	 <a href="write.jsp" class="w3-bar-item w3-button"><ion-icon name="create-outline"></ion-icon>포스팅</a>
+	</div>
+	<div class="w3-teal">
+  		<button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
     </div>
     <%
     	if(userID==null){
@@ -69,8 +67,7 @@
 			<th>제목</th>
 			<th>작성자</th>
 			<th>날짜</th>
-			<th>조회수</th>
-			<th>댓글수</th>	
+			<th>조회수</th>	
 		</tr>
 		</thead>
 		<tbody>
@@ -106,5 +103,14 @@
 	<a href="content.jsp" class= "write_btn" style="margin-top: 70px;">글쓰기</a>   
     </div> 
     </div>
+    <script>
+	function w3_open() {
+	  document.getElementById("mySidebar").style.display = "block";
+	}
+
+	function w3_close() {
+	  document.getElementById("mySidebar").style.display = "none";
+	}
+	</script>
 </body>
 </html>

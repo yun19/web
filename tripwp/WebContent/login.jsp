@@ -6,29 +6,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="http://localhost/javascript/style.css?after">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
     <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
-     <title>집사들의 은밀한 공간</title> 
+     <title>YJ's Page</title> 
 </head>
 <body>
-    <div>
-        <ul>
-            <li><a href="write.jsp">자랑게시판</a></li>
-            <li><a href="#">입양/임시보호</a></li>
-            <li><a href="#">기타</a>
-                <ul>
-                    <li><a href="#">공지사항</a></li>
-                    <li><a href="#">Q&A</a></li>
-                </ul>
-            </li>
-        </ul>
+    <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
+ 	 <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+     <a href="write.jsp" class="w3-bar-item w3-button"><ion-icon name="accessibility-outline"></ion-icon>토이 프로젝트</a>
+ 	 <a href="https://github.com/yun19?tab=repositories" class="w3-bar-item w3-button"><ion-icon name="enter-outline"></ion-icon>깃허브</a>
+  	 <a href="#" class="w3-bar-item w3-button"><ion-icon name="create-outline"></ion-icon>포스팅</a>
+    </div>  
+	<div class="w3-teal">
+  		<button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
     </div>
-    <h2 style="text-align:center;">로그인 화면</h3>
-    <div class="login_sns" >
-            <li><a href=""><i class="fab fa-instagram"></i></a></li>
-            <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href=""><i class="fab fa-twitter"></i></a></li>
-    </div>
+    <h2 style="text-align:center;">로그인 화면</h2>
+  
     <div class="container" style="padding-top:20px;">
     		<form method="post" action="loginAction.jsp">
     				<div class="form_group" style="margin:5px">
@@ -40,6 +34,14 @@
     				<input type="submit" class="btn_form" value="로그인">
  			  </form>
     	</div>
-    
+    <script>
+	function w3_open() {
+	  document.getElementById("mySidebar").style.display = "block";
+	}
+
+	function w3_close() {
+	  document.getElementById("mySidebar").style.display = "none";
+	}
+    </script>
 </body>
 </html>

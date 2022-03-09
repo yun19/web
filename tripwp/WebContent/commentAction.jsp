@@ -41,7 +41,7 @@
 			script.println("</script>");
 		}else{
 			CommentDAO commentDAO= new CommentDAO();
-			int commentID = commentDAO.write(boardID, uwID, userID, comment.getCommentText());
+			int commentID = commentDAO.write(uwID, userID, comment.getCommentText());
 			if(commentID==-1){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");

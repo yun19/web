@@ -10,8 +10,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="http://localhost/javascript/write_style.css?after">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
 <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
-<title>집사들의 은밀한 공간</title>
+<title>YJ's Page</title> 
 </head>
 <body>
 	<%
@@ -46,18 +48,14 @@
 			script.println("</script>");
 		}
 	%>
-    <div class="menu_form">
-        <ul style="text-align:center;">
-        	<li><a href="main.jsp">HOME</a></li>
-            <li><a href="write.jsp">자랑게시판</a></li>
-            <li><a href="#">입양/임시보호</a></li>
-            <li><a href="#">기타</a>
-                <ul>
-                    <li><a href="#">공지사항</a></li>
-                    <li><a href="#">Q&A</a></li>
-                </ul>
-            </li>
-        </ul>
+    <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
+ 		 <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+    	 <a href="write.jsp" class="w3-bar-item w3-button"><ion-icon name="accessibility-outline"></ion-icon>토이 프로젝트</a>
+ 		 <a href="https://github.com/yun19?tab=repositories" class="w3-bar-item w3-button"><ion-icon name="enter-outline"></ion-icon>깃허브</a>
+  		 <a href="#" class="w3-bar-item w3-button"><ion-icon name="create-outline"></ion-icon>포스팅</a>
+	</div> 
+	<div class="w3-teal">
+  		<button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
     </div>
 
     <div id="in" style="padding-right: 230px;">
@@ -66,7 +64,7 @@
     </div>  
     <div class="container">
     <div clsss="row">
-        <form method="post" action="updateAction.jsp?uwID=<%= uwID %>">
+        <form method="post" encType = "multipart/form-data" action="updateAction.jsp?uwID=<%=uwID %>">
 		<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
 			<thead>
 			<tr>
@@ -80,12 +78,23 @@
 			<tr>	
 				<td><textarea class="form-control" placeholder="글 내용" name="uwContent" maxlength="2048"><%= uw.getUwContent()%></textarea></td>
 			</tr>
+			<tr>
+				<td><input type="file" name ="fileName" style="float:left;"></td>
+			</tr>
 			</tbody>
 		</table>
 	<input type="submit" class= "btn btn-primary pull-right" value="글 수정" style="margin: auto;"/>   
     </form>   
     </div>		    
     </div>
+	<script>
+	function w3_open() {
+	  document.getElementById("mySidebar").style.display = "block";
+	}
 
+	function w3_close() {
+	  document.getElementById("mySidebar").style.display = "none";
+	}
+	</script>
 </body>
 </html>

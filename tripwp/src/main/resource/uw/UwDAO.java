@@ -48,11 +48,12 @@ public class UwDAO {
 		}
 		return -1; //데이터베이스 오류
 	}
-	public int countUpdate(int uwCount) {
-		String SQL="update uw set uwCount =? ";
+	public int countUpdate(int uwCount, int uwID) {
+		String SQL="update uw set uwCount =? where uwID = ? ";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, uwCount);
+			pstmt.setInt(2, uwID);
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -77,11 +78,11 @@ public class UwDAO {
 		return -1; //데이터베이스 오류
 	}
 	public ArrayList<Uw> getList(int pageNumber){
-		String SQL="select * from UW where uwID < ? and uwAvailable=1 order by uwID desc limit 10";
+		String SQL="select * from UW where uwID < ? and uwAvailable=1 order by uwID desc limit 5";
 		ArrayList<Uw> list= new ArrayList<Uw>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, getNext()-(pageNumber-1)*10);
+			pstmt.setInt(1, getNext()-(pageNumber-1)*5);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Uw uw =new Uw();
@@ -91,10 +92,7 @@ public class UwDAO {
 				uw.setUwDate(rs.getString(4));
 				uw.setUwContent(rs.getString(5));
 				uw.setUwAvailable(rs.getInt(6));
-				int uwCount=rs.getInt(7);
-				uw.setUwCount(uwCount);
-				uwCount++;
-				countUpdate(uwCount);
+				uw.setUwCount(rs.getInt(7));
 				list.add(uw);
 			}
 		}catch(Exception e) {
@@ -103,10 +101,10 @@ public class UwDAO {
 		return list; //데이터베이스 오류
 	}
 	public boolean nextPage(int pageNumber) {
-		String SQL="select * from UW where uwID < ? and uwAvailable=1 order by uwID desc limit 10";
+		String SQL="select * from UW where uwID < ? and uwAvailable=1";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, getNext()-(pageNumber-1)*10);
+			pstmt.setInt(1, getNext()-(pageNumber-1)*5);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				return true;
@@ -133,7 +131,7 @@ public class UwDAO {
 				int uwCount=rs.getInt(7);
 				uw.setUwCount(uwCount);
 				uwCount++;
-				countUpdate(uwCount);
+				countUpdate(uwCount, uwID);
 				return uw;
 			}
 		}catch(Exception e) {

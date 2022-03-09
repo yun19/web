@@ -47,23 +47,21 @@ public class CommentDAO {
 		}
 		return -1; //데이터베이스 오류
 	}
-	public ArrayList<Comment> getList(int boardID, int uwID){
-		String SQL="select * from comment where boardID = ? and uwID = ? and commentAvailable=1 order by uwID desc";
+	public ArrayList<Comment> getList(int uwID){
+		String SQL="select * from comment where uwID = ? and commentAvailable=1 order by uwID desc";
 		ArrayList<Comment> list= new ArrayList<Comment>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, boardID);
-			pstmt.setInt(2, uwID);
+			pstmt.setInt(1, uwID);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Comment cmt = new Comment();
-				cmt.setBoardID(rs.getInt(1));
-				cmt.setCommentID(rs.getInt(2));
-				cmt.setUwID(rs.getInt(3));
-				cmt.setUserID(rs.getString(4));
-				cmt.setCommentDate(rs.getString(5));
-				cmt.setCommentText(rs.getString(6));
-				cmt.setCommentAvailable(rs.getInt(7));
+				cmt.setCommentID(rs.getInt(1));
+				cmt.setUwID(rs.getInt(2));
+				cmt.setUserID(rs.getString(3));
+				cmt.setCommentDate(rs.getString(4));
+				cmt.setCommentText(rs.getString(5));
+				cmt.setCommentAvailable(rs.getInt(6));
 				list.add(cmt);
 			}
 		}catch(Exception e) {
@@ -93,17 +91,16 @@ public class CommentDAO {
 		}
 		return null; //데이터베이스 오류
 	}
-	public int write(int boardID, int uwID, String userID, String commentText) {
-		String SQL="insert into comment values(?, ?, ?, ?, ?, ?, ?)";
+	public int write(int uwID, String userID, String commentText) {
+		String SQL="insert into comment values(?, ?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, boardID);
-			pstmt.setInt(2, getNext());
-			pstmt.setInt(3, uwID);
-			pstmt.setString(4, userID);
-			pstmt.setString(5, getDate());
-			pstmt.setString(6, commentText);
-			pstmt.setInt(7, 1);
+			pstmt.setInt(1, getNext());
+			pstmt.setInt(2, uwID);
+			pstmt.setString(3, userID);
+			pstmt.setString(4, getDate());
+			pstmt.setString(5, commentText);
+			pstmt.setInt(6, 1);
 			pstmt.executeUpdate();
 			return getNext();
 		}catch(Exception e) {

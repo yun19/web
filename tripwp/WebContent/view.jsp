@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="http://localhost/javascript/write_style.css?after">
 <link rel="stylesheet" href="css/bootstrap.css">
 <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
-<title>집사들의 은밀한 공간</title>
+<title>YJ's Page</title>
 </head>
 <body>
 	<%
@@ -26,10 +26,6 @@
 		if(request.getParameter("uwID") != null){
 			uwID = Integer.parseInt(request.getParameter("uwID"));
 		}
-		int boardID=0;
-		if(request.getParameter("boardID")!=null){
-			boardID = Integer.parseInt(request.getParameter("boardID"));
-		}
 		if(uwID == 0){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
@@ -39,18 +35,14 @@
 		}
 		Uw uw =new UwDAO().getUw(uwID);
 	%>
-    <div class="menu_form">
-        <ul style="text-align:center;">
-        	<li><a href="main.jsp">HOME</a></li>
-            <li><a href="write.jsp">자랑게시판</a></li>
-            <li><a href="#">입양/임시보호</a></li>
-            <li><a href="#">기타</a>
-                <ul>
-                    <li><a href="#">공지사항</a></li>
-                    <li><a href="#">Q&A</a></li>
-                </ul>
-            </li>
-        </ul>
+     <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; position:fixed;" id="mySidebar">
+ 		 <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+     		<a href="main.jsp" class="w3-bar-item w3-button"><ion-icon name="home-outline"></ion-icon>HOME</a>
+ 	 		<a href="https://github.com/yun19?tab=repositories" class="w3-bar-item w3-button"><ion-icon name="earth-outline"></ion-icon>깃허브</a>
+  	 		<a href="write.jsp" class="w3-bar-item w3-button"><ion-icon name="create-outline"></ion-icon>포스팅</a>
+	</div>
+	<div class="w3-teal">
+  		<button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
     </div>
     <%
     	if(userID==null){
@@ -128,7 +120,7 @@
 				<tr>
 				<%
 				CommentDAO commentDAO = new CommentDAO();
-				ArrayList<Comment> list = commentDAO.getList(boardID,uwID);
+				ArrayList<Comment> list = commentDAO.getList(uwID);
 				for(int i=0; i< list.size(); i++){
 				%>
 					<div class="container">
